@@ -36,13 +36,24 @@ const thankYou = reactive({
   show: false,
   countdown: 10
 })
+
 function submit(score) {
-  fetch(
-    `${import.meta.env.VITE_GOOGLE_FORM}?` +
-    `entry.1874024667=${email.value}&` +
-    `entry.97356366=${JSON.stringify(trial)}&` +
-    `entry.1658723679=${score}`
-    , { mode: 'no-cors' })
+  const keys = JSON.parse(import.meta.env.VITE_GOOGLE_FORM_ENTRIES)
+  const values = [
+    email.value,
+    round.value,
+    trial.app,
+    trial.type,
+    trial.method,
+    trial.sample,
+    score,
+  ]
+  let formResponse = `${import.meta.env.VITE_GOOGLE_FORM_URL}?`
+  for (let i = 0; i < keys.length; i++) {
+    formResponse += `${keys[i]}=${values[i]}&`
+  }
+  formResponse = formResponse.slice(0, -1)
+  fetch(formResponse, { mode: 'no-cors' })
 
   round.value += 1
   done = round.value > totalRound

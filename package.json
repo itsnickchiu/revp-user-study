@@ -4,7 +4,7 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "vite",
+    "dev": "vite --host",
     "dev-pages": "vite --base=/revp-user-study/",
     "build": "vite build",
     "build-pages": "vite build --base=/revp-user-study/",

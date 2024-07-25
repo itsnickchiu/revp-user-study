@@ -69,39 +69,47 @@ function submit() {
 </template>
 
 <style scoped>
-p{
+p {
   margin: 10px 0 10px 0;
 }
+
 .image-container {
   display: flex;
   justify-content: center;
-  align-items: center; 
+  align-items: center;
   margin-bottom: 20px;
 }
+
 img {
+  border: 2px solid #888;
   width: 48%;
   margin: 3px;
 }
+
 .score-container {
   display: flex;
   justify-content: space-around;
-  align-items: flex-end; 
+  align-items: flex-end;
   margin-bottom: 10px;
 }
+
 .radio-container {
   display: flex;
   justify-content: space-between;
   width: 60%;
 }
+
 .radio-item {
   display: flex;
   flex-direction: column;
   align-items: center;
 }
+
 label {
   font-size: 13pt;
   cursor: pointer;
 }
+
 input {
   -webkit-appearance: none;
   -moz-appearance: none;
@@ -117,8 +125,10 @@ input {
 
   cursor: pointer;
 }
+
 input:checked {
   border: 6px solid var(--color-text);
-  outline: unset !important /* I added this one for Edge (chromium) support */
+  outline: unset !important
+    /* I added this one for Edge (chromium) support */
 }
 </style>

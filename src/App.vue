@@ -16,6 +16,16 @@ function getRandomInt(max) {
   return Math.floor(Math.random() * max);
 }
 
+function getProbIndex(prob) {
+  // prob for 'message'
+  var sampleNum = 30
+  var idxArr = new Array(sampleNum);
+  idxArr.fill(1, 0, sampleNum * prob);
+  idxArr.fill(0, sampleNum * prob, sampleNum);
+  var idx = Math.floor(Math.random() * idxArr.length);
+  return idxArr[idx];
+}
+
 function start() {
   if (email.value === '') {
     return
@@ -26,7 +36,7 @@ function start() {
 const trial = reactive({})
 function newTrial() {
   trial.app = meta.apps[getRandomInt(meta.apps.length)]
-  trial.type = meta.types[1] // no cover, only message
+  trial.type = meta.types[getProbIndex(0.9)] // no cover, only message
   trial.method = meta.methods[getRandomInt(meta.methods.length)]
   trial.sample = getRandomInt(30)
 }

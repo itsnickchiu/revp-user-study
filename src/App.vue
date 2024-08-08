@@ -26,10 +26,14 @@ function getProbIndex(prob) {
   return idxArr[idx];
 }
 
+const checked = ref(false)
+const showWarning = ref(false)
 function start() {
-  if (email.value === '') {
+  if (checked.value === false) {
+    showWarning.value = true
     return
   }
+  showWarning.value = false
   round.value = 1
 }
 
@@ -156,20 +160,38 @@ onBeforeUnmount(() => {
           </template>
         </p>
 
+        <div>
+          <br>
+          <a href="https://drive.google.com/file/d/15i3S7kWxVL5SZGJCJZ4sVtcDdbqXLppG/view" target="_blank">中央研究院人文社會科學研究對象說明同意書</a>
+          <br>
+          <input type="checkbox" id="checkbox" v-model="checked" />
+          <template v-if="lang === 'zh-TW'"> 我已閱讀並同意 </template>
+          <template v-else> I have read and agree </template>
+        </div>
+
         <label for="email" class="green">
-          <template v-if="lang === 'zh-TW'"> 請輸入您的 email 來開始作答 </template>
+          <br>
+          <template v-if="lang === 'zh-TW'">
+            <!-- 請輸入您的 email 來開始作答 -->
+            抽獎用信箱（選填，僅為抽獎通知用）
+          </template>
           <template v-else>
-            Please enter your email to get started.
+            <!-- Please enter your email to get started. -->
+            Optional, only for the lottery notification.
           </template>
         </label>
 
         <div>
           <input type="email" id="email" v-model="email" v-on:keyup.enter="start" />
           <button @click="start">
-            <template v-if="lang === 'zh-TW'"> 送出 </template>
-            <template v-else> Submit </template>
+            <template v-if="lang === 'zh-TW'"> 下一步 </template>
+            <template v-else> Next </template>
           </button>
         </div>
+        <p class="green" for="" v-if="showWarning">
+          <template v-if="lang === 'en-US'"> Please confirm that you've read the agreement </template>
+          <template v-else> 請確認已閱讀以上同意書並同意 </template>
+        </p>
       </div>
       <div v-else>
         <header>
@@ -214,7 +236,7 @@ onBeforeUnmount(() => {
             <li>資料用途：本問卷內容僅供學術研究之用。</li>
             <li>聯絡資訊：您的 email 等聯絡資訊僅供 7-11 禮券抽獎使用，不會留下任何身份等敏感資訊。</li>
             <li>資料刪除：所有聯絡資料將於問卷調查與抽獎完畢後立即刪除。</li>
-            <li>退出與刪除權利：您可在填寫問卷時隨時退出，填寫完成後也可來信 (<a href="shchu@citi.sinica.edu.tw">shchu@citi.sinica.edu.tw</a> 或 <a href="pullpull@citi.sinica.edu.tw">pullpull@citi.sinica.edu.tw</a>) 要求刪除相關資料。</li>
+            <li>退出與刪除權利：您可在填寫問卷時隨時退出，填寫完成後也可來信 (<a href="nickchiu@citi.sinica.edu.tw">nickchiu@citi.sinica.edu.tw</a> 或 <a href="pullpull@citi.sinica.edu.tw">pullpull@citi.sinica.edu.tw</a>) 要求刪除相關資料。</li>
           </ul>
           <br>
           <h3>資料管理細節</h3>
@@ -235,7 +257,7 @@ onBeforeUnmount(() => {
           </ul>
           <br>
           <h3>實驗進行方式</h3>
-          您將對預先使用不同生成模型的生成影像或影片進行個人主觀的品質評分與排序，並評估其是否與給定的條件相符（如文字描述等條件） 。您將進行 30 組的實驗，大約花費 5 至 10 分鐘，但您可隨時依自己的狀態停止實驗。
+          您將對預先使用不同生成模型的生成影像或影片進行個人主觀的品質評分與排序，並評估其是否與給定的條件相符（如文字描述等條件）。您將進行 30 組的實驗（圖片兩兩為一組），大約花費 5 至 10 分鐘，但您可隨時依自己的狀態停止實驗。
         </template>
         <template v-else>
           
@@ -251,7 +273,7 @@ onBeforeUnmount(() => {
             <li>Data Usage: The content of this questionnaire is solely for academic research purposes.</li>
             <li>Contact Information: Your email and other contact information will only be used for a 7-11 gift voucher lottery and will not be used to record any personal identification or sensitive information.</li>
             <li>Data Deletion: All contact information will be deleted immediately after the questionnaire survey and lottery are completed.</li>
-            <li>Withdrawal and Deletion Rights: You can withdraw from the questionnaire at any time during the process. After completion, you can also request the deletion of relevant data by sending an email to <a href="shchu@citi.sinica.edu.tw">shchu@citi.sinica.edu.tw</a> or <a href="pullpull@citi.sinica.edu.tw">pullpull@citi.sinica.edu.tw</a>.</li>
+            <li>Withdrawal and Deletion Rights: You can withdraw from the questionnaire at any time during the process. After completion, you can also request the deletion of relevant data by sending an email to <a href="nickchiu@citi.sinica.edu.tw">nickchiu@citi.sinica.edu.tw</a> or <a href="pullpull@citi.sinica.edu.tw">pullpull@citi.sinica.edu.tw</a>.</li>
           </ul>
           <br>
           <h3>Details of Data Management</h3>
@@ -272,7 +294,7 @@ onBeforeUnmount(() => {
           </ul>
           <br>
           <h3>Experimental Procedure</h3>
-          You will be asked to provide your subjective evaluation and ranking of the quality of pre-generated images or videos using different generation models, and to assess whether they meet the given criteria (e.g., text descriptions). You will participate in 12 sets of experiments, which will take approximately 5 to 10 minutes. You can stop the experiment at any time based on your own condition.
+          You will be asked to provide your subjective evaluation and ranking of the quality of pre-generated images or videos using different generation models, and to assess whether they meet the given criteria (e.g., text descriptions). You will participate in 30 sets of experiments (the images are grouped in pairs), which will take approximately 5 to 10 minutes. You can stop the experiment at any time based on your own condition.
         </template>
       </div>
     </div>

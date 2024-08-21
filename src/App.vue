@@ -177,7 +177,7 @@ onBeforeUnmount(() => {
           </template>
           <template v-else>
             <!-- Please enter your email to get started. -->
-            Optional, only for the lottery notification.
+            E-mail (optional, only for the lottery notification)
           </template>
         </label>
 

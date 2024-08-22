@@ -140,7 +140,7 @@ onBeforeUnmount(() => {
             <br><br>
             我們正在進行 AI 生成影像與影片之使用者偏好評量相關研究。本研究旨在評估現有影像與影片生成模型的生成品質，通過主觀和客觀的評估方法，分析模型生成影像的品質，進一步了解並分析生成模型的特性。
             <br><br>
-            本研究將透過 Google 表單進行問卷調查，提供您由模型預先生成的影像或影片，並請您針對其品質及是否符合給定的生成條件進行評分。
+            本研究將透過此網站進行問卷調查，提供您由模型預先生成的影像或影片，並請您針對其品質及是否符合給定的生成條件進行評分。
             <br><br>
             有效填寫問卷者可選擇留下email參加抽獎，我們將抽出有效問卷的 1/20 贏取7-11百元禮券。
           </template>
@@ -162,8 +162,13 @@ onBeforeUnmount(() => {
 
         <div>
           <br>
-          <a href="https://drive.google.com/file/d/15i3S7kWxVL5SZGJCJZ4sVtcDdbqXLppG/view" target="_blank">中央研究院人文社會科學研究對象說明同意書</a>
-          <br>
+          <template v-if="lang === 'zh-TW'">
+            <a href="https://drive.google.com/file/d/15i3S7kWxVL5SZGJCJZ4sVtcDdbqXLppG/view" target="_blank">中央研究院人文社會科學研究對象說明同意書</a>
+          </template>
+          <template v-else>
+            <a href="https://drive.google.com/file/d/15i3S7kWxVL5SZGJCJZ4sVtcDdbqXLppG/view" target="_blank">Academia Sinica Humanities and Social Sciences Research Subject Description and Consent Form</a>
+          </template>
+            <br>
           <input type="checkbox" id="checkbox" v-model="checked" />
           <template v-if="lang === 'zh-TW'"> 我已閱讀並同意 </template>
           <template v-else> I have read and agree </template>
@@ -189,7 +194,7 @@ onBeforeUnmount(() => {
           </button>
         </div>
         <p class="green" for="" v-if="showWarning">
-          <template v-if="lang === 'en-US'"> Please confirm that you've read the agreement </template>
+          <template v-if="lang === 'en-US'"> Please confirm that you've read the consent form and agree </template>
           <template v-else> 請確認已閱讀以上同意書並同意 </template>
         </p>
       </div>
